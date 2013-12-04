@@ -39,9 +39,28 @@ combos_inGame = [
 		input.up = false;
 	},
 	"prevent_default": true,
+},
+{
+	"keys": "k",
+	"on_keydown": function() {
+		input.up = true;
+	},
+	"on_keyup": function() {
+		input.up = false;
+	},
+	"prevent_default": true,
 }, 
 {
 	"keys": "left",
+	"on_keydown": function() {
+		input.left = true;
+	},
+	"on_keyup": function() {
+		input.left = false;
+	}
+},
+{
+	"keys": "h",
 	"on_keydown": function() {
 		input.left = true;
 	},
@@ -59,7 +78,26 @@ combos_inGame = [
 	}
 },
 {
+	"keys": "l",
+	"on_keydown": function() {
+		input.right = true;
+	},
+	"on_keyup": function() {
+		input.right = false;
+	}
+},
+{
 	"keys": "down",
+	"on_keydown": function() {
+		input.down = true;
+	},
+	"on_keyup": function() {
+		input.down = false;
+	},
+	"prevent_default": true,
+},
+{
+	"keys": "j",
 	"on_keydown": function() {
 		input.down = true;
 	},
