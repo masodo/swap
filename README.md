@@ -16,7 +16,7 @@ Enjoy!
 
 Controls
 -----------------
-WASD/arrow keys - move your character  
+WASD/arrow keys/vim hjkl - move your character  
 Space - switch to another character
 
 Screenshots
