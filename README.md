@@ -14,7 +14,7 @@ Swap is written in Javascript using the HTML 5 canvas for rendering. It is playa
 
 Enjoy!
 
-Controls
+Controls (now with VIM keybindings!)
 -----------------
 WASD/arrow keys/vim hjkl - move your character  
 Space - switch to another character
