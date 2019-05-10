@@ -11,9 +11,11 @@ var world = function() {
 	var hasDied = false;
 	var prevTime;
 	var hasWon = false;
-
-	var init = function(level, canvasId, hudId, tipId) {
-		renderer.init(canvasId, hudId, tipId);
+	var myScore = 0;
+	var harm = 0;
+	
+	var init = function(level, canvasId, hudId, tipId, myScore) {
+		renderer.init(canvasId, hudId, tipId, myScore);
 		initLevel(level);
 		createDialogue("Welcome to Swap");
 		prevTime = Date.now();
@@ -27,9 +29,19 @@ var world = function() {
 
 		curLevel = level;
 		if(level==levels.length) {
-			// alert("That's all folks!");
-			createDialogue("That's all folks");
-			return;
+		//Use this instead to test end of levels at end of level 2
+		//if(level==2) {
+		alert("That's all folks!");
+		//createDialogue("That's all folks");
+		harm = (deaths * 100);
+		myScore = ((curLevel * 1000) - harm);
+		let pathArray = window.location.pathname.split('/');
+                  let newpath = '';
+                if (pathArray[1] && pathArray[1] != 'arcade' && pathArray[1] != 'games') {
+	        	newpath = '/' + pathArray[1];
+                }
+                scorepost(window.location.protocol + '//' + window.location.hostname + newpath + '/index.php?act=Arcade&do=newscore', 'swap_masodo', myScore);
+       			return;
 		}
 
 		renderer.initLevel(levels[level]);
@@ -40,7 +52,10 @@ var world = function() {
 		input.reset();
 				
 		loadLevel(level);
-		renderer.renderText(deaths, curLevel, levels[curLevel].tip);
+		harm = (deaths * 100);
+		myScore = ((curLevel * 1000) - harm);
+		renderer.renderText(deaths, curLevel, levels[curLevel].tip, myScore);
+		
 
 		intervalId = setInterval(run, 1000 / fps);
 		run();
@@ -63,9 +78,19 @@ var world = function() {
 		if(!hasDied) 
 			deaths++; 
 		hasDied = true;
-		renderer.renderText(deaths, curLevel, levels[curLevel].tip);
+		renderer.renderText(deaths, curLevel, levels[curLevel].tip, myScore);
 		// initLevel(curLevel);
 	}
+
+	var sendmyScore = function() { 
+	//alert("Score: " + myScore);
+	let pathArray = window.location.pathname.split('/');
+        let newpath = '';
+          if (pathArray[1] && pathArray[1] != 'arcade' && pathArray[1] != 'games') {
+		newpath = '/' + pathArray[1];
+           }
+       scorepost(window.location.protocol + '//' + window.location.hostname + newpath + '/index.php?act=Arcade&do=newscore', 'swap_masodo', myScore);
+       }
 
 	var loadLevel = function(index) {
 		// loads level from level file
@@ -184,5 +209,6 @@ var world = function() {
 		death: death,
 		closeDialogue: closeDialogue,
 		resetLevel: resetLevel,
+		sendmyScore: sendmyScore,
 	}
 }();
